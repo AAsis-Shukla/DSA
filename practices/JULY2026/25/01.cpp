@@ -53,9 +53,27 @@ void inorder(Node* root){
     cout<<root->data<<" ";
     inorder(root->right);
 }
+
+// function which print all Node's value of BST in a given range
+void printRange(Node* root, int start, int end){
+    if(root == NULL){
+        return;
+    }
+    if(root->data >= start && root->data <= end){
+        cout<<root->data<<" ";
+        printRange(root->left, start,end);
+        printRange(root->right, start,end);
+    }else if(root->data <start){
+        printRange(root->right,start,end);
+    }else{
+        printRange(root->left,start,end);
+    }
+}
 int main(){
-    int arr[] = {5,1,3,4,2,7};
-    Node*root = buildBST(arr,6);
-    cout<<searchBST(root,10)<<endl;
+    int arr[] = {8,5,3,1,4,6,10,11,14};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    Node*root = buildBST(arr,n);
+    printRange(root,5,12);
+    cout<<endl;
     return 0;
 }
